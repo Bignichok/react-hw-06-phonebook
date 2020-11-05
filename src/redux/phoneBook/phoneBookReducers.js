@@ -23,8 +23,10 @@ const phoneBookReducers = (state = initialState, { type, payload }) => {
         state.contacts &&
         state.contacts.some((contact) => contact.name === payload.contact.name)
       ) {
-        alert("we have the same");
-        return state;
+        return {
+          ...state,
+          showError: !payload.showError,
+        };
       } else {
         return {
           ...state,

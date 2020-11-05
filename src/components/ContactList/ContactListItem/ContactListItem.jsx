@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import {deleteContact} from '../../../redux/phoneBook/phoneBookActions'
 
 const ContactsListItem = ({ name, number, onDeleteContact }) => {
   return (
@@ -14,7 +16,7 @@ const ContactsListItem = ({ name, number, onDeleteContact }) => {
 
       </div>
     
-      <button type="button" onClick={onDeleteContact}>
+      <button type="button" onClick={ onDeleteContact}>
        
       </button>
     </li>
@@ -32,4 +34,19 @@ ContactsListItem.propTypes = {
   number: PropTypes.string,
   onDeleteContact: PropTypes.func,
 };
-export default ContactsListItem;
+
+const mapStateToProps = (state, ownProps) => {
+  const contact = state.phoneBook.contacts.find(contact => contact.id === ownProps.id)
+  return {...contact}
+  
+}
+
+const mapDispatchToProps = (dispatch,ownProps)=> {
+  return {
+    onDeleteContact: ()=>dispatch(deleteContact(ownProps.id)) 
+ }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(ContactsListItem)
+
+

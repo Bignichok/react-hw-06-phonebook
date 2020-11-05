@@ -4,38 +4,32 @@ import PropTypes from "prop-types";
 import {CSSTransition,TransitionGroup,} from 'react-transition-group';
 import styles from './ContactList.module.css'
 import { connect } from "react-redux";
-import {deleteContact} from '../../redux/phoneBook/phoneBookActions'
 
-const ContactList = ({ contacts, onDeleteContact }) => {
+
+
+const ContactList = ({ contacts }) => {
  
   return <TransitionGroup component='ul' className={`${styles.contactList} `}>
-        {contacts.map(({ id, name, number }) => (
+        {contacts.map(({ id }) => (
               <CSSTransition  key={id}
               timeout={250}
               classNames={styles}>
-                <ContactsListItem
-                  name={name}
-                  number={number}
-                  onDeleteContact={() => onDeleteContact(id)}
-                />
+            <ContactsListItem id={id}/>
               </CSSTransition>
     )
   )}
         </TransitionGroup>;
 };
 
+
 const mapStateToProps = (state) => {
+  const { contacts, filter } = state.phoneBook
+  const lowerCaseFilter = filter.toLowerCase()
   return {
-    contacts: state.phoneBook.contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(state.phoneBook.filter.toLowerCase())
+    contacts: contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(lowerCaseFilter)
     )
   }
-}
-
-const mapDispatchToProps = (dispatch)=> {
-  return {
-    onDeleteContact: (id)=>dispatch(deleteContact(id)) 
- }
 }
 
 ContactList.defaultProps = {
@@ -54,8 +48,5 @@ ContactList.propTypes = {
   onDeleteContact: PropTypes.func,
 };
 
-
-
-export default connect(mapStateToProps,mapDispatchToProps)(ContactList)
-
+export default connect(mapStateToProps,null)(ContactList)
 
