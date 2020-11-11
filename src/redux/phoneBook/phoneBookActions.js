@@ -7,7 +7,7 @@ import {
   TOGGLE_ERROR,
 } from "./phoneBookActionsTypes";
 
-export const addContact = (name, number, id) => {
+export const addContact = (name, number) => {
   return {
     type: ADD_CONTACT,
     payload: {

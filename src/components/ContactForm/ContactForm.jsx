@@ -67,7 +67,7 @@ class ContactForm extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddContact: (name,number,id) => dispatch(addContact(name,number,id))
+    onAddContact: (name,number) => dispatch(addContact(name,number))
   }
 }
 
