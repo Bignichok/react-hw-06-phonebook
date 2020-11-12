@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styles from "./ContactForm.module.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addContact} from '../../redux/phoneBook/phoneBookActions'
+import { addContact} from '../../redux/phoneBook/phoneBookReducers'
 
 class ContactForm extends Component {
   static defaultProps = {

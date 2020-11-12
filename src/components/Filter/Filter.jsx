@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Filter.module.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import {changeFilter} from '../../redux/phoneBook/phoneBookActions'
+import {changeFilter} from '../../redux/phoneBook/phoneBookReducers'
 
 const Filter = ({ filter, onChangeFilter }) => {
   return (
@@ -20,14 +20,7 @@ const Filter = ({ filter, onChangeFilter }) => {
   );
 };
 
-Filter.defaultProps = {
-  onChangeFilter: () => {},
-};
 
-Filter.propTypes = {
-  onChangeFilter: PropTypes.func,
-  filter: PropTypes.string,
-};
 
 const mapStateToProps = (state) => {
   return {
@@ -40,5 +33,14 @@ const mapDispatchToProps = (dispatch) => {
     onChangeFilter: (filter)=>dispatch(changeFilter(filter))
   }
 }
+
+Filter.defaultProps = {
+  onChangeFilter: () => {},
+};
+
+Filter.propTypes = {
+  onChangeFilter: PropTypes.func,
+  filter: PropTypes.string,
+};
 
 export default connect(mapStateToProps,mapDispatchToProps)(Filter);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {toggleError} from '../../redux/phoneBook/phoneBookActions'
+import {toggleError} from '../../redux/phoneBook/phoneBookReducers'
 import styles from './Error.module.css'
 
 const Error=({closeHandler})=>  {
