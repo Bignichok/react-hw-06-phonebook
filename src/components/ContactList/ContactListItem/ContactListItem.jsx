@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {deleteContact} from '../../../redux/phoneBook/phoneBookActions'
 
-const ContactsListItem = ({ contact: { name, number }, onDeleteContact }) => {
+const ContactsListItem = ({ contact: { name, number } , onDeleteContact }) => {
+
+
  
   return (
     <li className={`basic`}> 
@@ -14,31 +16,29 @@ const ContactsListItem = ({ contact: { name, number }, onDeleteContact }) => {
       <p>
         <span>Number:</span> {number}
       </p>
-
       </div>
-    
       <button type="button" onClick={ onDeleteContact}>
-       
       </button>
     </li>
   );
 };
 
 ContactsListItem.defaultProps = {
-  name: "anonymous",
+  contact: {
+    name: "anonymous",
   number: "888888888",
+  },
   onDeleteContact: () => {},
 };
 
 ContactsListItem.propTypes = {
-  name: PropTypes.string,
-  number: PropTypes.string,
+ contact: PropTypes.object,
   onDeleteContact: PropTypes.func,
 };
 
 const mapStateToProps = (state, { id }) => ({
     contact: state.phoneBook.contacts.find(contact => contact.id === id)
-  })
+})
 
 const mapDispatchToProps = (dispatch,ownProps)=> {
   return {
