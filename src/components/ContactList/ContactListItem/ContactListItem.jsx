@@ -38,7 +38,6 @@ ContactsListItem.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   const contact = state.phoneBook.contacts.find(contact => contact.id === ownProps.id)
   return {...contact}
-  
 }
 
 const mapDispatchToProps = (dispatch,ownProps)=> {
