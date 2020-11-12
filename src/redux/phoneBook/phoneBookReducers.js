@@ -30,6 +30,7 @@ const phoneBookReducers = (state = initialState, { type, payload }) => {
       } else {
         return {
           ...state,
+          showError: payload.showError,
           contacts: [...state.contacts, newContact],
         };
       }
