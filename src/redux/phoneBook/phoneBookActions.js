@@ -22,7 +22,6 @@ export const addContact = (name, number) => {
     type: ADD_CONTACT,
     payload: {
       contact: { name, number, id: uuidv4() },
-      showError: false,
     },
   };
 };

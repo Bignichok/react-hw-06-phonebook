@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./ContactForm.module.css";
 import PropTypes from "prop-types";
-import { addContact} from '../../redux/phoneBook/phoneBookActions'
+import { addContact, toggleError} from '../../redux/phoneBook/phoneBookActions'
 
 const ContactForm = () => {
   const dispatch = useDispatch()
+  const contacts = useSelector(({ phoneBook }) => phoneBook.contacts);
+
   const [name, setName] = useState('');
   const [number,setNumber] = useState('')
 
@@ -14,7 +16,12 @@ const ContactForm = () => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(addContact(name,number))
+    if (contacts && contacts.some((contact) => contact.name === name)) { 
+      dispatch(toggleError(true))
+     setTimeout(()=>dispatch(toggleError(false)),3000)
+    } else {
+      dispatch(addContact(name, number))
+    }
     setName('');
     setNumber('')
   }

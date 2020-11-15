@@ -26,21 +26,10 @@ const phoneBookReducers = (state = initialState, { type, payload }) => {
         number: payload.contact.number,
         id: payload.contact.id,
       };
-      if (
-        state.contacts &&
-        state.contacts.some((contact) => contact.name === payload.contact.name)
-      ) {
-        return {
-          ...state,
-          showError: !payload.showError,
-        };
-      } else {
-        return {
-          ...state,
-          showError: payload.showError,
-          contacts: [...state.contacts, newContact],
-        };
-      }
+      return {
+        ...state,
+        contacts: [...state.contacts, newContact],
+      };
 
     case DELETE_CONTACT:
       return {
