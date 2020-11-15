@@ -11,11 +11,11 @@ const ContactList = ({ contacts }) => {
  
   return <TransitionGroup component='ul' className={`${styles.contactList} `}>
         {contacts.map(({ id }) => (
-              <CSSTransition  key={id}
+            <CSSTransition  key={id}
               timeout={250}
               classNames={styles}>
             <ContactsListItem id={id}/>
-              </CSSTransition>
+            </CSSTransition>
     )
   )}
         </TransitionGroup>;
@@ -23,16 +23,12 @@ const ContactList = ({ contacts }) => {
 
 
 const mapStateToProps = (state) => {
-   
   const { contacts, filter } = state.phoneBook
   const lowerCaseFilter = filter.toLowerCase()
   return {
-    
     contacts: contacts.filter((contact) => {
-
-      return contact.name.toLowerCase().includes(lowerCaseFilter)
+    return contact.name.toLowerCase().includes(lowerCaseFilter)
     }
-      
     )
   }
 }
