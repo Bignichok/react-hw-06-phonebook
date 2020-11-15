@@ -1,15 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { CSSTransition } from "react-transition-group";
+import { getContacts } from "./redux/phoneBook/phoneBookReducers";
 import ContactList from "./components/ContactList/ContactList";
 import ContactForm from "./components/ContactForm/ContactForm";
 import Filter from "./components/Filter/Filter";
 import Error from "./components/Error/Error.jsx";
-import { CSSTransition } from "react-transition-group";
 import fadeStyles from "./css/fade.module.css";
 import errorFadeStyles from "./css/errorFadeStyles.module.css";
 import "./App.css";
-import { connect } from "react-redux";
 
-const App = ({ filter, contacts, showError }) => {
+const App = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(({ phoneBook }) => phoneBook.contacts);
+  const filter = useSelector(({ phoneBook }) => phoneBook.filter);
+  const showError = useSelector(({ phoneBook }) => phoneBook.showError);
+
+  useEffect(() => {
+    if (localStorage.getItem("contacts") !== null) {
+      const contacts = JSON.parse(localStorage.getItem("contacts"));
+      dispatch(getContacts(contacts));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  }, [contacts]);
+
   return (
     <div className="App">
       <CSSTransition
@@ -68,11 +85,4 @@ const App = ({ filter, contacts, showError }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    contacts: state.phoneBook.contacts,
-    showError: state.phoneBook.showError,
-  };
-};
-
-export default connect(mapStateToProps, null)(App);
+export default App;

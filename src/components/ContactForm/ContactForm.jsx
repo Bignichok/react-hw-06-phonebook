@@ -1,40 +1,34 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./ContactForm.module.css";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { addContact} from '../../redux/phoneBook/phoneBookReducers'
+import { addContact, toggleError} from '../../redux/phoneBook/phoneBookReducers'
 
-class ContactForm extends Component {
-  static defaultProps = {
-    onAddContact: () => {},
-  };
+const ContactForm = () => {
+  const dispatch = useDispatch()
+  const contacts = useSelector(({ phoneBook }) => phoneBook.contacts);
 
-  static propTypes = {
-    onAddContact: PropTypes.func,
-  };
+  const [name, setName] = useState('');
+  const [number,setNumber] = useState('')
 
-  state = {
-    name: "",
-    number: "",
-  };
+  const nameChangeHandler = (e) => setName(e.target.value)
+  const numberChangeHandler =(e)=>setNumber(e.target.value)
 
-  inputChangeHandler = (e,type) => {
-    this.setState({
-      [type]:e.target.value
-    })
-  }
-
-  submitHandler = (e) => {
+  const submitHandler = (e) => {
     e.preventDefault()
-    const {name,number} = this.state
-    this.props.onAddContact(name, number)
-    this.setState({name:'',number:''})
+    if (contacts && contacts.some((contact) => contact.name === name)) { 
+      dispatch(toggleError(true))
+     setTimeout(()=>dispatch(toggleError(false)),3000)
+    } else {
+      dispatch(addContact(name, number))
+    }
+    setName('');
+    setNumber('')
   }
   
 
-  render() {
-    return (
-      <form onSubmit={this.submitHandler} className={`${styles.phoneBookForm} basic`}>
+  return (
+      <form onSubmit={submitHandler} className={`${styles.phoneBookForm} basic`}>
         <label htmlFor="formName" className={styles.formLabel}> 
           Name
           <input
@@ -43,8 +37,8 @@ class ContactForm extends Component {
             id="formName"
             type="text"
             name="name"
-            value={this.state.name}
-            onChange={(e)=>this.inputChangeHandler(e,'name')}
+            value={name}
+            onChange={nameChangeHandler}
           />
         </label>
         <label htmlFor="formNumber" className={styles.formLabel}>
@@ -54,22 +48,19 @@ class ContactForm extends Component {
             id="formNumber"
             type="number"
             name="number"
-            value={this.state.number}
+            value={number}
             required
-            onChange={(e)=>this.inputChangeHandler(e,'number')}
+            onChange={numberChangeHandler}
           />
         </label>
         <button type="submit">Add contact</button>
       </form>
     );
-  }
+  
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onAddContact: (name,number,id) => dispatch(addContact(name,number,id))
-  }
-}
+ContactForm.propTypes = {
+    onAddContact: PropTypes.func,
+  };
 
-
-export default connect(null,mapDispatchToProps)(ContactForm);
+export default ContactForm;

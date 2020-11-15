@@ -5,7 +5,11 @@ const initialState = {
   filter: "",
   showError: false,
 };
-
+export const getContacts = createAction("GET_CONTACTS", (contacts) => ({
+  payload: {
+    contacts,
+  },
+}));
 export const addContact = createAction("ADD_CONTACT", (name, number) => ({
   payload: {
     contact: { name, number, id: uuidv4() },
@@ -16,27 +20,21 @@ export const deleteContact = createAction("DELETE_CONTACT");
 export const changeFilter = createAction("CHANGE_FILTER");
 export const toggleError = createAction("TOGGLE_ERROR");
 
+const onGetContacts = (state, { payload }) => ({
+  ...state,
+  contacts: [...state.contacts, ...payload.contacts],
+});
+
 const onAddContact = (state, { payload }) => {
   const newContact = {
     name: payload.contact.name,
     number: payload.contact.number,
     id: payload.contact.id,
   };
-  if (
-    state.contacts &&
-    state.contacts.some((contact) => contact.name === payload.contact.name)
-  ) {
-    return {
-      ...state,
-      showError: !payload.showError,
-    };
-  } else {
-    return {
-      ...state,
-      showError: payload.showError,
-      contacts: [...state.contacts, newContact],
-    };
-  }
+  return {
+    ...state,
+    contacts: [...state.contacts, newContact],
+  };
 };
 
 const onDeleteContact = (state, { payload }) => ({
@@ -55,6 +53,7 @@ const onToggleError = (state, { payload }) => ({
 });
 
 const phoneBookReducers = createReducer(initialState, {
+  [getContacts.type]: onGetContacts,
   [addContact.type]: onAddContact,
   [deleteContact.type]: onDeleteContact,
   [changeFilter.type]: onChangeFilter,
