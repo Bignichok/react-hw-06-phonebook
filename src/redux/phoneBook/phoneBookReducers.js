@@ -3,6 +3,7 @@ import {
   DELETE_CONTACT,
   CHANGE_FILTER,
   TOGGLE_ERROR,
+  GET_CONTACTS,
 } from "./phoneBookActionsTypes";
 
 const initialState = {
@@ -13,6 +14,12 @@ const initialState = {
 
 const phoneBookReducers = (state = initialState, { type, payload }) => {
   switch (type) {
+    case GET_CONTACTS:
+      return {
+        ...state,
+        contacts: [...state.contacts, ...payload.contacts],
+      };
+
     case ADD_CONTACT:
       const newContact = {
         name: payload.contact.name,

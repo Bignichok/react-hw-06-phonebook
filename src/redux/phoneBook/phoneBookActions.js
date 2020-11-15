@@ -5,7 +5,17 @@ import {
   DELETE_CONTACT,
   CHANGE_FILTER,
   TOGGLE_ERROR,
+  GET_CONTACTS,
 } from "./phoneBookActionsTypes";
+
+export const getContacts = (contacts) => {
+  return {
+    type: GET_CONTACTS,
+    payload: {
+      contacts,
+    },
+  };
+};
 
 export const addContact = (name, number) => {
   return {

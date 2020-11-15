@@ -23,11 +23,16 @@ const ContactList = ({ contacts }) => {
 
 
 const mapStateToProps = (state) => {
+   
   const { contacts, filter } = state.phoneBook
   const lowerCaseFilter = filter.toLowerCase()
   return {
-    contacts: contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(lowerCaseFilter)
+    
+    contacts: contacts.filter((contact) => {
+
+      return contact.name.toLowerCase().includes(lowerCaseFilter)
+    }
+      
     )
   }
 }
