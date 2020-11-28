@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CSSTransition } from "react-transition-group";
+
 import { getContacts } from "./redux/phoneBook/phoneBookActions";
+
 import ContactList from "./components/ContactList/ContactList";
 import ContactForm from "./components/ContactForm/ContactForm";
 import Filter from "./components/Filter/Filter";
 import Error from "./components/Error/Error.jsx";
+
 import fadeStyles from "./css/fade.module.css";
 import errorFadeStyles from "./css/errorFadeStyles.module.css";
 import "./App.css";

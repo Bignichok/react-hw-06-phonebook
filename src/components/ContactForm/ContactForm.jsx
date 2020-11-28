@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "./ContactForm.module.css";
 import PropTypes from "prop-types";
-import { addContact, toggleError} from '../../redux/phoneBook/phoneBookActions'
+
+import { addContact, toggleError } from '../../redux/phoneBook/phoneBookActions'
+
+import styles from "./ContactForm.module.css";
 
 const ContactForm = () => {
   const dispatch = useDispatch()

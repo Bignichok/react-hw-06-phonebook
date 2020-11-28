@@ -1,6 +1,7 @@
 import { createStore } from "redux";
-import phoneBookReducers from "./phoneBook/phoneBookReducers";
 import { combineReducers } from "redux";
+
+import phoneBookReducers from "./phoneBook/phoneBookReducers";
 
 const rootReducer = combineReducers({
   phoneBook: phoneBookReducers,

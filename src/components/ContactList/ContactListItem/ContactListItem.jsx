@@ -1,13 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
 import {deleteContact} from '../../../redux/phoneBook/phoneBookActions'
 
-const ContactsListItem = ({  name, number  , onDeleteContact }) => {
-
-
- 
-  return (
+const ContactsListItem = ({  name, number  , onDeleteContact }) =>  (
     <li className={`basic`}> 
       <div>
       <p>
@@ -21,7 +18,7 @@ const ContactsListItem = ({  name, number  , onDeleteContact }) => {
       </button>
     </li>
   );
-};
+
 
 ContactsListItem.defaultProps = {
   name: "anonymous",
@@ -30,7 +27,7 @@ ContactsListItem.defaultProps = {
 };
 
 ContactsListItem.propTypes = {
- contact: PropTypes.object,
+  contact: PropTypes.object,
   onDeleteContact: PropTypes.func,
 };
 

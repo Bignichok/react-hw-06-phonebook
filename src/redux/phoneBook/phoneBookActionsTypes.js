@@ -1,5 +1,7 @@
 export const ADD_CONTACT = "ADD_CONTACT";
 export const DELETE_CONTACT = "DELETE_CONTACT";
-export const CHANGE_FILTER = "CHANGE_FILTER";
-export const TOGGLE_ERROR = "TOGGLE_ERROR";
 export const GET_CONTACTS = "SET_CONTACTS";
+
+export const CHANGE_FILTER = "CHANGE_FILTER";
+
+export const TOGGLE_ERROR = "TOGGLE_ERROR";
