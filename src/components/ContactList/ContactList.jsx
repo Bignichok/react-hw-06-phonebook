@@ -1,9 +1,11 @@
 import React from "react";
-import ContactsListItem from "./ContactListItem/ContactListItem";
-import PropTypes from "prop-types";
-import {CSSTransition,TransitionGroup,} from 'react-transition-group';
-import styles from './ContactList.module.css'
 import { connect } from "react-redux";
+import {CSSTransition,TransitionGroup,} from 'react-transition-group';
+import PropTypes from "prop-types";
+
+import ContactsListItem from "./ContactListItem/ContactListItem";
+
+import styles from './ContactList.module.css'
 
 
 

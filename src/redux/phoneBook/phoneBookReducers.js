@@ -1,21 +1,25 @@
 import { v4 as uuidv4 } from "uuid";
 import { createReducer, createAction } from "@reduxjs/toolkit";
+
 const initialState = {
   contacts: [],
   filter: "",
   showError: false,
 };
+
 export const getContacts = createAction("GET_CONTACTS", (contacts) => ({
   payload: {
     contacts,
   },
 }));
+
 export const addContact = createAction("ADD_CONTACT", (name, number) => ({
   payload: {
     contact: { name, number, id: uuidv4() },
     showError: false,
   },
 }));
+
 export const deleteContact = createAction("DELETE_CONTACT");
 export const changeFilter = createAction("CHANGE_FILTER");
 export const toggleError = createAction("TOGGLE_ERROR");

@@ -4,8 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {changeFilter} from '../../redux/phoneBook/phoneBookReducers'
 
-const Filter = ({ filter, onChangeFilter }) => {
-  return (
+const Filter = ({ filter, onChangeFilter }) =>  (
     <div className={`${styles.wrp} basic`}>
       <label className={styles.filterLabel}>
         Find Contacts by name
@@ -18,21 +17,17 @@ const Filter = ({ filter, onChangeFilter }) => {
           /> 
     </div>
   );
-};
 
 
 
-const mapStateToProps = (state) => {
-  return {
+
+const mapStateToProps = (state) => ({
     filter: state.phoneBook.filter
-  }
-}
+})
 
-const mapDispatchToProps = (dispatch) => {
-  return {
+const mapDispatchToProps = (dispatch) => ({
     onChangeFilter: (filter)=>dispatch(changeFilter(filter))
-  }
-}
+})
 
 Filter.defaultProps = {
   onChangeFilter: () => {},
